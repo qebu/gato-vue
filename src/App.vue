@@ -7,17 +7,23 @@
     </v-app-bar>
 
     <v-content>
-      <names @players-setted="savePlayers"></names>
+      <names
+        v-if="!Object.entries(players).length === 0"
+        @players-setted="savePlayers"
+      />
+      <board v-else :players="players"></board>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import Names from "./components/Names.vue";
+import Board from "./components/Board.vue";
 
 export default {
   name: "App",
   components: {
+    Board,
     Names
   },
   data() {

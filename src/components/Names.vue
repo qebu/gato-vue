@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-row justify="center" style="height: 300px">
-      <v-col cols="6" align-self="center">
+    <v-row justify="center" class="mt-5">
+      <v-col cols="6">
         <v-card outlined>
           <v-card-title>
             Jugadores
@@ -36,6 +36,8 @@
 
 <script>
 export default {
+  name: "Names",
+
   data() {
     return {
       player1: "",
