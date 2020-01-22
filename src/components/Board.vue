@@ -15,6 +15,7 @@
         </v-row>
       </v-col>
     </v-row>
+    {{ marksBoard }}
   </v-container>
 </template>
 
@@ -37,11 +38,54 @@ export default {
       )
     };
   },
+  computed: {
+    marksBoard() {
+      let marks = [...Object.values(this.boardMarks)];
+      let matrix = [];
+
+      while (marks.length > 0) {
+        matrix.push(marks.splice(0, 3));
+      }
+
+      return matrix;
+    }
+  },
   methods: {
     play(index) {
       this.boardMarks[index] = this.currentPlayer;
+      const hasWinner = this.checkWinner(index - 1);
+      if (hasWinner) {
+        alert("Ganaste!");
+      }
+
       this.currentPlayer =
         this.currentPlayer === "player1" ? "player2" : "player1";
+    },
+    checkWinner(pos) {
+      const pos_row = Math.floor(pos / 3);
+      const pos_col = pos % 3;
+
+      const row_uniq = new Set(this.marksBoard[pos_row]);
+      const col_uniq = new Set(this.marksBoard.map(x => x[pos_col]));
+
+      if (row_uniq.size === 1 || col_uniq.size === 1) {
+        return true;
+      } else if (pos % 2 === 0) {
+        const diags = [
+          [0, 4, 8],
+          [2, 4, 6]
+        ];
+        const boardArray = [...Object.values(this.boardMarks)];
+
+        for (const d of diags) {
+          let boardDiag = boardArray.filter((e, i) => d.includes(i));
+          if (new Set(boardDiag).size == 1 && !boardDiag.includes("")) {
+            return true;
+          }
+        }
+      }
+
+      return false;
     }
   }
 };

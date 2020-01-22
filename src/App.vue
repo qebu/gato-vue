@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      players: {}
+      players: { player1: "A", player2: "B" }
     };
   },
   methods: {
