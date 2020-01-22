@@ -19,18 +19,16 @@
 </template>
 
 <script>
-import Tile from "./Tile.vue";
+import Tile from "../components/Tile.vue";
 
 export default {
   name: "Board",
   components: { Tile },
-  props: {
-    players: Object
-  },
   data() {
     return {
+      players: this.$store.state.players,
       currentPlayer: "player1",
-      playerMarks: { player1: "X", player2: "O" },
+      playerMarks: { player1: "🗙", player2: "⭘" },
       boardMarks: [...Array(9).keys()].reduce(
         (o, k) => ({ ...o, [k + 1]: "" }),
         {}

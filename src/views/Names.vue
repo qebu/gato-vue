@@ -23,7 +23,7 @@
               outlined
               block
               color="primary"
-              @click="sendPlayerNames"
+              @click="savePlayers"
             >
               OK
             </v-btn>
@@ -46,11 +46,15 @@ export default {
   },
 
   methods: {
-    sendPlayerNames() {
-      this.$emit("players-setted", {
-        player1: this.player1,
-        player2: this.player2
-      });
+    savePlayers() {
+      this.$store
+        .dispatch("editPlayers", {
+          player1: this.player1,
+          player2: this.player2
+        })
+        .then(() => {
+          this.$router.push({ name: "board" });
+        });
     }
   }
 };
