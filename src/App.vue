@@ -8,7 +8,7 @@
 
     <v-content>
       <names
-        v-if="!Object.entries(players).length === 0"
+        v-if="Object.entries(players).length === 0"
         @players-setted="savePlayers"
       />
       <board v-else :players="players"></board>
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      players: { player1: "A", player2: "B" }
+      players: {}
     };
   },
   methods: {

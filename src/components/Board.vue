@@ -15,7 +15,6 @@
         </v-row>
       </v-col>
     </v-row>
-    {{ marksBoard }}
   </v-container>
 </template>
 
